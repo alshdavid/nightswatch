@@ -1,0 +1,12 @@
+[package]
+name = "nightswatch_cli"
+version = "0.0.0-local"
+edition = "2021"
+
+
+[[bin]]
+name = "nightswatch"
+path = "./src/main.rs"
+
+[dependencies]
+nightswatch = { path = "../nightswatch", features = ["cli"] }

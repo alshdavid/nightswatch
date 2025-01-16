@@ -1,0 +1,10 @@
+[package]
+name = "nightswatch"
+version = "0.0.0-local"
+edition = "2021"
+
+[features]
+cli = ["dep:clap"]
+
+[dependencies]
+clap = { workspace = true, features = ["derive"], optional = true }

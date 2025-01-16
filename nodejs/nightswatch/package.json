@@ -1,0 +1,40 @@
+{
+  "name": "@alshdavid/nightswatch",
+  "version": "0.0.0-local",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alshdavid/nightswatch.git"
+  },
+  "files": [
+    "cmd",
+    "lib",
+    "types",
+    "package.json",
+    "postinstall.mjs",
+    "tsconfig.json"
+  ],
+  "bin": {
+    "nightswatch": "cmd/bin.js"
+  },
+  "exports": {
+    ".": {
+      "@alshdavid::nightswatch::source": "./src/cmd/lib/index.ts",
+      "types": "./src/cmd/lib/index.ts",
+      "default": "./dist/cmd/lib/index.js"
+    },
+    "./**": "./**"
+  },
+  "optionalDependencies": {
+    "@alshdavid/nightswatch-linux-amd64": "0.0.0-local",
+    "@alshdavid/nightswatch-linux-arm64": "0.0.0-local",
+    "@alshdavid/nightswatch-macos-amd64": "0.0.0-local",
+    "@alshdavid/nightswatch-macos-arm64": "0.0.0-local",
+    "@alshdavid/nightswatch-windows-amd64": "0.0.0-local",
+    "@alshdavid/nightswatch-windows-arm64": "0.0.0-local"
+  },
+  "peerDependencies": {
+    "@types/node": ">=20"
+  }
+}

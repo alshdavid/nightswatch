@@ -1,0 +1,10 @@
+[package]
+name = "nightswatch_nodejs"
+version = "0.0.0-local"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+nightswatch = { path = "../../rust/nightswatch", features = ["cli"] }
