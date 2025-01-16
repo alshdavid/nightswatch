@@ -8,3 +8,7 @@ cli = ["dep:clap"]
 
 [dependencies]
 clap = { workspace = true, features = ["derive"], optional = true }
+notify-debouncer-full = { workspace = true }
+serde = {  workspace = true, features = ["derive"] }
+bincode = {  workspace = true }
+thiserror = "2.0.11"

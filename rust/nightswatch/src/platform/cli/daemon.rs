@@ -1,20 +1,21 @@
-use std::path::PathBuf;
-
 use clap::Parser;
 
-use crate::{daemon::DaemonOptions, platform::socket::Socket};
+use crate::daemon::DaemonOptions;
 
 #[derive(Debug, Parser)]
 pub struct DaemonCommand {
-  /// Path to the socket file
-  #[arg(short = 's', long = "socket-path")]
-  pub socket_path: Option<PathBuf>,
+  // /// Path to the socket file
+  // #[arg(short = 's', long = "socket-path")]
+  // pub socket_path: Option<PathBuf>,
+  /// TCP address for clients
+  #[arg(short = 't', long = "tcp-address")]
+  pub tcp_address: Option<String>,
 }
 
-impl From<DaemonCommand> for DaemonOptions {
-  fn from(value: DaemonCommand) -> Self {
+impl From<DaemonCommand> for DaemonOptions<String> {
+  fn from(cmd: DaemonCommand) -> Self {
     DaemonOptions {
-      socket_path: value.socket_path.unwrap_or_else(Socket::default_path)
+      tcp_address: cmd.tcp_address,
     }
   }
 }
