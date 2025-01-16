@@ -4,6 +4,4 @@ use serde::Deserialize;
 use serde::Serialize;
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
-pub struct WatchMessage {
-  pub target: PathBuf,
-}
+pub struct ChangeMessage {}

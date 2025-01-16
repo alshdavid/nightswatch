@@ -1,3 +1,5 @@
+use std::sync::mpsc::SendError;
+
 #[derive(thiserror::Error, Debug)]
 pub enum Error {
   #[error("std::io::Error")]
@@ -6,6 +8,18 @@ pub enum Error {
   Generic(String),
   #[error("BincodeError")]
   Bincode(#[from] bincode::Error),
+}
+
+impl<T> From<SendError<T>> for Error {
+  fn from(value: SendError<T>) -> Self {
+    Self::Generic(value.to_string())
+  }
+}
+
+impl<Guard> From<std::sync::PoisonError<Guard>> for Error {
+  fn from(value: std::sync::PoisonError<Guard>) -> Self {
+    Self::Generic(value.to_string())
+  }
 }
 
 impl From<String> for Error {

@@ -12,6 +12,7 @@ clap = "^4.0.0"
 notify-debouncer-full = "^0.5.0"
 serde = { version = "^1.0.0", features = ["derive"] }
 bincode = "^1.0.0"
+normalize-path = "*"
 
 [profile.release]
 opt-level = 3

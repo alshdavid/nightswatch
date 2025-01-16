@@ -12,3 +12,4 @@ notify-debouncer-full = { workspace = true }
 serde = {  workspace = true, features = ["derive"] }
 bincode = {  workspace = true }
 thiserror = "2.0.11"
+normalize-path = { workspace = true }

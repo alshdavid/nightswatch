@@ -2,7 +2,7 @@ use clap::Parser;
 
 use crate::daemon::DaemonOptions;
 
-#[derive(Debug, Parser)]
+#[derive(Clone, Debug, Parser)]
 pub struct DaemonCommand {
   // /// Path to the socket file
   // #[arg(short = 's', long = "socket-path")]

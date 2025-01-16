@@ -2,17 +2,21 @@ use std::io::Read;
 
 use bincode;
 
-use super::ConnectMessage;
+use super::ChangeMessage;
+use super::WatchMessage;
 use crate::NwResult;
 
+#[derive(Clone, Debug)]
 pub enum MessageKind {
-  Connect(ConnectMessage),
+  Watch(WatchMessage),
+  Change(ChangeMessage),
 }
 
 impl MessageKind {
   pub fn to_socket_message(&self) -> NwResult<Vec<u8>> {
     let (i, bytes): (u8, Vec<u8>) = match self {
-      MessageKind::Connect(msg) => (0, bincode::serialize(&msg)?),
+      MessageKind::Watch(msg) => (0, bincode::serialize(&msg)?),
+      MessageKind::Change(msg) => (1, bincode::serialize(&msg)?),
     };
 
     let len = bytes.len();
@@ -50,7 +54,10 @@ impl MessageKind {
     };
 
     match message_type {
-      0 => Ok(Self::Connect(bincode::deserialize::<ConnectMessage>(
+      0 => Ok(Self::Watch(bincode::deserialize::<WatchMessage>(
+        &buf_body,
+      )?)),
+      1 => Ok(Self::Change(bincode::deserialize::<ChangeMessage>(
         &buf_body,
       )?)),
       _ => Err("Unknown message")?,

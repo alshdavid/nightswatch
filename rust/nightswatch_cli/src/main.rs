@@ -4,7 +4,13 @@ fn main() -> nightswatch::NwResult<()> {
       nightswatch::daemon::start(daemon_command.into())
     }
     nightswatch::cli::CliCommandType::Watch(watch_command) => {
-      nightswatch::client::Client::connect(watch_command.into())
+      let client = nightswatch::client::Client::connect(watch_command.clone().into())?;
+
+      for _update in client.watch_dir(watch_command.into())? {
+        println!("update");
+      }
+
+      Ok(())
     }
   }
 }
